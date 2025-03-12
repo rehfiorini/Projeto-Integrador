@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saúde +</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 350px;
+            padding: 20px;
+            background: white;
+            color: black;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .hidden {
+            display: none;
+        }
+        .menu button, .back-button, .login-button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .menu button:hover, .back-button:hover, .login-button:hover {
+            background: #0056b3;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="loginScreen">
+        <h2>Saúde +</h2>
+        <input type="text" id="username" placeholder="Nome Completo">
+        <input type="password" id="password" placeholder="Senha">
+        <button class="login-button" onclick="login()">Entrar</button>
+    </div>
+    
+    <div class="container hidden" id="dashboard">
+        <h2>Saúde +</h2>
+        <div class="menu">
+            <button onclick="showSection('consultas')">Agendar Consulta</button>
+            <button onclick="showSection('receitas')">Receitas Médicas</button>
+            <button onclick="showSection('historico')">Histórico Médico</button>
+            <button onclick="showSection('acompanhamento')">Acompanhamento de Atendimento</button>
+        </div>
+        <div id="consultas" class="section hidden">
+            <h3>Agendamento de Consultas</h3>
+            <p>Atendimento Online disponível.</p>
+            <button class="back-button" onclick="goBack()">Voltar</button>
+        </div>
+        <div id="receitas" class="section hidden">
+            <h3>Receitas Médicas</h3>
+            <p>Acesse suas receitas médicas aqui.</p>
+            <button class="back-button" onclick="goBack()">Voltar</button>
+        </div>
+        <div id="historico" class="section hidden">
+            <h3>Histórico Médico</h3>
+            <p>Aqui você encontra detalhes sobre seus atendimentos.</p>
+            <button class="back-button" onclick="goBack()">Voltar</button>
+        </div>
+        <div id="acompanhamento" class="section hidden">
+            <h3>Acompanhamento de Atendimento</h3>
+            <p>Acompanhe o status e evolução do seu tratamento.</p>
+            <button class="back-button" onclick="goBack()">Voltar</button>
+        </div>
+        <button class="back-button" onclick="logout()">Sair</button>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            if (username && password) {
+                document.getElementById("loginScreen").classList.add("hidden");
+                document.getElementById("dashboard").classList.remove("hidden");
+            } else {
+                alert("Por favor, preencha todos os campos.");
+            }
+        }
+
+        function showSection(section) {
+            document.querySelectorAll(".section").forEach(sec => sec.classList.add("hidden"));
+            document.getElementById(section).classList.remove("hidden");
+        }
+
+        function goBack() {
+            document.querySelectorAll(".section").forEach(sec => sec.classList.add("hidden"));
+        }
+
+        function logout() {
+            document.getElementById("dashboard").classList.add("hidden");
+            document.getElementById("loginScreen").classList.remove("hidden");
+        }
+    </script>
+</body>
+</html>
+
+
